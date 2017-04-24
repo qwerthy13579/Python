@@ -1,0 +1,19 @@
+import urllib.request
+import random
+import get_lasted_ip as glip
+
+url = 'http://www.whatismyip.com.tw'
+
+
+ip = glip.get_iplist()
+
+proxy_sup = urllib.request.ProxyHandler({'http':ip})
+
+opener = urllib.request.build_opener(proxy_sup)
+opener.addheaders = [('User-Agent','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36')]
+urllib.request.install_opener(opener)
+
+response = urllib.request.urlopen(url)
+html = response.read().decode('utf-8')
+
+print(html)
